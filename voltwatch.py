@@ -1,13 +1,16 @@
 #!/usr/bin/python
 
 import paho.mqtt.client as mqtt
+import json
 
 def on_connect(client, userdata, flags, rc):
 	client.subscribe("tele/sonoffpow/ENERGY")
 
 def on_message(client, userdata, msg):
 	bruto = msg.payload
-	print(bruto)
+	carga = json.loads(bruto)
+	volts = carga['Voltage']
+	print(volts)
 
 client = mqtt.Client()
 client.on_connect = on_connect
