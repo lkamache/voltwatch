@@ -12,7 +12,7 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, msg):
 	carga = json.loads(msg.payload)
 	volts = carga['Voltage']
-	print(volts)
+	print(str(volts)+" volts")
 	logging.info(volts)
 
 client = mqtt.Client()
