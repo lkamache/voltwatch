@@ -10,8 +10,7 @@ def on_connect(client, userdata, flags, rc):
 	client.subscribe("tele/sonoffpow/ENERGY")
 
 def on_message(client, userdata, msg):
-	bruto = msg.payload
-	carga = json.loads(bruto)
+	carga = json.loads(msg.payload)
 	volts = carga['Voltage']
 	print(volts)
 	logging.info(volts)
