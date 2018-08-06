@@ -2,6 +2,9 @@
 
 import paho.mqtt.client as mqtt
 import json
+import logging
+
+logging.basicConfig(filename='voltlog.log', level=logging.INFO, format='%(asctime)s %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
 
 def on_connect(client, userdata, flags, rc):
 	client.subscribe("tele/sonoffpow/ENERGY")
@@ -11,6 +14,7 @@ def on_message(client, userdata, msg):
 	carga = json.loads(bruto)
 	volts = carga['Voltage']
 	print(volts)
+	logging.info(volts)
 
 client = mqtt.Client()
 client.on_connect = on_connect
